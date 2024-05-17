@@ -81,8 +81,6 @@ function validarEmail() {
     }
 }
 
-let pontuacaoSenhaAnterior = 0;
-
 function validarPassword() {
     const senha = password.value.trim();
     const nome = document.querySelector("#inputName").value.trim();
@@ -108,14 +106,14 @@ function validarPassword() {
     let forcaSenha = "";
     if (senha.length < 8) {
         forcaSenha = "fraca";
-        forcaSenha.style.color = "red";
+        passwordHelp.style.color = "red";
     } else if (senha.length <= 12) {
         if (regexLetra.test(senha) && senha !== senha.toLowerCase()) {
             forcaSenha = "moderada";
-            forcaSenha.style.color = "orange";
+            passwordHelp.style.color = "orange";
         } else {
             forcaSenha = "fraca";
-            forcaSenha.style.color = "red";
+            passwordHelp.style.color = "red";
         }
     } else {
         let caractereEspecialCount = (senha.match(/[@#$%&!+_\-]+/g) || []).length;
@@ -124,10 +122,10 @@ function validarPassword() {
 
         if (caractereEspecialCount > 1 && numeroCount > 1 && letraMaiusculaCount > 1) {
             forcaSenha = "forte";
-            forcaSenha.style.color = "green";
+            passwordHelp.style.color = "green";
         } else {
             forcaSenha = "moderada";
-            forcaSenha.style.color = "orange";
+            passwordHelp.style.color = "orange";
         }
     }
 
@@ -138,6 +136,4 @@ function validarPassword() {
     }
 
     passwordHelp.textContent = `Força da senha: ${forcaSenha}`;
-    passwordHelp.style.color = forcaSenha.style.color;
 }
-
