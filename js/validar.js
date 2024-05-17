@@ -138,6 +138,6 @@ function validarPassword() {
     }
 
     passwordHelp.textContent = `Força da senha: ${forcaSenha}`;
-    // passwordHelp.style.color = "green";
+    passwordHelp.style.color = forcaSenha.style.color;
 }
 
