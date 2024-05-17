@@ -138,33 +138,6 @@ function validarPassword() {
     }
 
     passwordHelp.textContent = `Força da senha: ${forcaSenha}`;
-    passwordHelp.style.color = "green";
-
-    // Verifica se a senha atual é mais fraca do que a senha anteriormente avaliada
-    const pontuacaoAtual = calcularForcaSenha(senha);
-    if (pontuacaoAtual < pontuacaoSenhaAnterior) {
-        passStrengthMeter.value = pontuacaoAtual;
-    } else {
-        // Atualizar o medidor de força da senha
-        passStrengthMeter.value = pontuacaoAtual > passStrengthMeter.value ? pontuacaoAtual : passStrengthMeter.value;
-        pontuacaoSenhaAnterior = pontuacaoAtual;
-    }
+    // passwordHelp.style.color = "green";
 }
 
-function calcularForcaSenha(senha) {
-    let pontuacao = 0;
-
-    // Adicionar pontos com base no comprimento da senha
-    pontuacao += senha.length;
-
-    // Adicionar pontos por caracteres especiais
-    pontuacao += (senha.match(/([@#$%&!+_\-])\1*/g) || []).length * 2;
-
-    // Adicionar pontos por letras maiúsculas
-    pontuacao += (senha.match(/[A-Z]/g) || []).length * 2;
-
-    // Adicionar pontos por números
-    pontuacao += (senha.match(/[0-9]/g) || []).length * 2;
-
-    return pontuacao;
-}
