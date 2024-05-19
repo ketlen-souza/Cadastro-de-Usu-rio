@@ -1,23 +1,6 @@
-//criando os objetos dos elementos de texto do form
-
 var nome = document.querySelector("#inputName");
 var nomeHelp = document.querySelector("#inputNameHelp");
 nome.addEventListener('focusout', validarNome);
-
-var ano = document.querySelector("#inputYear");
-var anoHelp = document.querySelector("#inputYearHelp");
-ano.addEventListener('focusout', validarAno);
-
-var email = document.querySelector("#inputEmail");
-var emailHelp = document.querySelector("#inputEmailHelp");
-email.addEventListener('focusout', validarEmail);
-
-var password = document.querySelector("#inputPassword");
-var passwordHelp = document.querySelector("#inputPasswordHelp");
-var passStrengthMeter = document.querySelector("#passStrengthMeter");
-var inputResult = document.querySelector("#inputResult");
-password.addEventListener('focusout', validarPassword);
-
 
 function validarNome(e){ 
     //declaração da expressão regular para definir o formato de um nome válido
@@ -36,6 +19,11 @@ function validarNome(e){
         nomeHelp.textContent = "";
     }       
 }
+
+
+var ano = document.querySelector("#inputYear");
+var anoHelp = document.querySelector("#inputYearHelp");
+ano.addEventListener('focusout', validarAno);
 
 function validarAno() {
     // declaração da expressão regular para definir o formato de um ano válido
@@ -70,6 +58,11 @@ function validarAno() {
     }
 }
 
+
+var email = document.querySelector("#inputEmail");
+var emailHelp = document.querySelector("#inputEmailHelp");
+email.addEventListener('focusout', validarEmail);
+
 function validarEmail() {
     const regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z]{2,})?(?:\.br|\.com|\.net|\.org)$/
 
@@ -80,6 +73,13 @@ function validarEmail() {
         emailHelp.textContent = "";
     }
 }
+
+
+var password = document.querySelector("#inputPassword");
+var passwordHelp = document.querySelector("#inputPasswordHelp");
+var passStrengthMeter = document.querySelector("#passStrengthMeter");
+var inputResult = document.querySelector("#inputResult");
+password.addEventListener('focusout', validarPassword);
 
 function validarPassword() {
     const senha = password.value.trim();
@@ -137,3 +137,26 @@ function validarPassword() {
 
     passwordHelp.textContent = `Força da senha: ${forcaSenha}`;
 }
+
+
+var form = document.querySelector("#singleForm");
+var submitMessage = document.querySelector("#submitMessage");
+
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    validarNome({ target: nome });
+    validarAno();
+    validarEmail();
+    validarPassword();
+
+    if (nomeHelp.textContent === "" &&
+        anoHelp.textContent === "" &&
+        emailHelp.textContent === "" &&
+        passwordHelp.textContent.startsWith("Força da senha")) {
+        submitMessage.textContent = "Seus dados foram registrados";
+        submitMessage.style.color = "green";
+    } else {
+        submitMessage.textContent = "Seus dados não foram registrados";
+        submitMessage.style.color = "red";
+    }
+});
